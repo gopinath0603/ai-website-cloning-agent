@@ -1,0 +1,32 @@
+{
+  "name": "ai-frontend-website-cloner",
+  "version": "2.0.0",
+  "description": "AI-Powered Frontend Website Cloning Agent using Gemini Free Tier API and Playwright Automation",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test/cloning.test.js"
+  },
+  "keywords": [
+    "ai-cloner",
+    "react-generator",
+    "gemini-free",
+    "playwright",
+    "zero-budget"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "esbuild": "^0.25.0",
+    "express": "^4.21.2",
+    "playwright": "^1.50.0",
+    "zod": "^3.24.2"
+  }
+}

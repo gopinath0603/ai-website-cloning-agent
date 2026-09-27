@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseAI — Frontend Website Cloning Agent</title>
+  <meta name="description" content="AI-Powered Frontend Website Cloning Agent using Gemini Free Tier API. Recreate any public website as a React frontend.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Header Navbar -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">PulseAI Agent</span>
+          <span class="brand-badge">React Website Cloner</span>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div class="engine-selector-wrapper">
+          <label for="engineSelect" class="engine-label">AI Engine:</label>
+          <select id="engineSelect" class="engine-select">
+            <option value="gemini" id="geminiOptionLabel" selected>Google Gemini (Free Tier)</option>
+            <option value="mock">Mock Engine (Deterministic)</option>
+          </select>
+        </div>
+
+        <a href="https://aistudio.google.com/" target="_blank" rel="noopener" class="free-badge-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Get Free Gemini Key ($0)
+        </a>
+      </div>
+    </header>
+
+    <!-- Key Warning Banner (Shown if Gemini key is missing when Gemini is selected) -->
+    <div id="keyWarningBanner" class="warning-banner glass-panel hidden">
+      <div class="warning-content">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span><strong>Gemini Key Not Configured:</strong> Set <code>GEMINI_API_KEY=your_key</code> in <code>.env.local</code> file, or select Mock Engine.</span>
+      </div>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <main class="main-container">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <h1 class="hero-title">AI-Powered <span class="gradient-text">Frontend Website Cloning Agent</span></h1>
+        <p class="hero-subtitle">Enter any public website URL to recreate its frontend as a clean, modular React component application.</p>
+
+        <!-- Input Bar -->
+        <div class="clone-box-card glass-panel">
+          <form id="cloneForm">
+            <div class="input-group">
+              <input type="text" id="urlInput" placeholder="Enter public website URL (e.g., https://example.com)" required>
+              <button type="submit" id="cloneBtn" class="btn-primary glow">
+                <span class="btn-text">Analyze & Clone</span>
+                <span class="btn-spinner hidden"></span>
+              </button>
+            </div>
+          </form>
+
+          <div class="quick-samples">
+            <span class="samples-label">Test 3 Different Websites:</span>
+            <button class="sample-chip" data-url="https://example.com">https://example.com (Minimal)</button>
+            <button class="sample-chip" data-url="https://wikipedia.org">https://wikipedia.org (Docs / Portal)</button>
+            <button class="sample-chip" data-url="https://news.ycombinator.com">https://news.ycombinator.com (App)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Pipeline Progress Tracker (Hidden initially) -->
+      <section id="progressTracker" class="progress-panel glass-panel hidden">
+        <h3 class="progress-title">Agent Execution Progress</h3>
+        <div class="progress-steps">
+          <div class="step-item" id="stepScrape">
+            <div class="step-icon">1</div>
+            <div class="step-details">
+              <span class="step-name">Analyzing Website Layout & DOM</span>
+              <span class="step-sub">Playwright browser automation & Real Computed CSS</span>
+            </div>
+          </div>
+          <div class="step-item" id="stepSpec">
+            <div class="step-icon">2</div>
+            <div class="step-details">
+              <span class="step-name">Generating WebsiteSpec</span>
+              <span class="step-sub">Gemini AI synthesis & Zod schema validation</span>
+            </div>
+          </div>
+          <div class="step-item" id="stepReact">
+            <div class="step-icon">3</div>
+            <div class="step-details">
+              <span class="step-name">Generating React Components</span>
+              <span class="step-sub">Gemini AI code generation (JSX & CSS)</span>
+            </div>
+          </div>
+          <div class="step-item" id="stepValidate">
+            <div class="step-icon">4</div>
+            <div class="step-details">
+              <span class="step-name">Validating Application & Build</span>
+              <span class="step-sub">JSX Babel compilation & AI Repair loop</span>
+            </div>
+          </div>
+          <div class="step-item" id="stepReady">
+            <div class="step-icon">5</div>
+            <div class="step-details">
+              <span class="step-name">Preview Verified</span>
+              <span class="step-sub">Playwright verified visible rendered application</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Generated Frontend Output Workspace (Hidden initially) -->
+      <section id="outputWorkspace" class="output-workspace hidden">
+        
+        <!-- Workspace Navbar Controls -->
+        <div class="workspace-bar glass-panel">
+          <div class="viewport-controls">
+            <span class="bar-label">Preview Viewport:</span>
+            <button class="viewport-btn active" data-width="100%" data-mode="desktop">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Desktop (1440px)
+            </button>
+            <button class="viewport-btn" data-width="768px" data-mode="tablet">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              Tablet (768px)
+            </button>
+            <button class="viewport-btn" data-width="375px" data-mode="mobile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              Mobile (375px)
+            </button>
+          </div>
+
+          <div class="workspace-actions">
+            <button id="viewCodeToggleBtn" class="secondary-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              Code Inspector
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Workspace Split: Preview Sandbox & AI Modifier Panel -->
+        <div class="workspace-layout">
+          
+          <!-- Left Column: Interactive Live Preview Sandbox -->
+          <div class="preview-container glass-panel">
+            <div class="sandbox-header">
+              <span class="dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></span>
+              <span class="preview-url-tag" id="previewUrlTag">Generated React App — Sandbox Preview</span>
+              <span class="badge-status" id="buildStatusBadge">Build Passed ✓</span>
+            </div>
+            
+            <div class="iframe-wrapper" id="iframeWrapper">
+              <iframe id="previewIframe" title="Generated React App Preview"></iframe>
+            </div>
+          </div>
+
+          <!-- Right Column: Natural Language AI Modification Panel -->
+          <div class="modifier-container glass-panel">
+            <div class="modifier-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <h3>Modify with Natural Language AI</h3>
+            </div>
+            <p class="modifier-desc">Gemini Modification Agent will analyze targeted components and apply code updates.</p>
+
+            <form id="modifyForm" class="modify-input-group">
+              <textarea id="modifyInput" placeholder="E.g., Make the navbar sticky, change primary color to teal, and add a testimonials section..." rows="4" required></textarea>
+              <button type="submit" id="modifyBtn" class="btn-primary glow">
+                <span class="btn-text">Apply AI Change</span>
+                <span class="btn-spinner hidden"></span>
+              </button>
+            </form>
+
+            <div class="quick-mod-chips">
+              <span class="mod-label">Preset AI Changes:</span>
+              <button class="mod-chip" data-prompt="Change primary theme color to teal">Theme Teal</button>
+              <button class="mod-chip" data-prompt="Change primary theme color to emerald green">Theme Green</button>
+              <button class="mod-chip" data-prompt="Make background dark black with white text">Dark Mode</button>
+              <button class="mod-chip" data-prompt="Add a customer testimonial section">Add Testimonials</button>
+            </div>
+
+            <div class="spec-summary-box">
+              <h4>Extracted WebsiteSpec Theme</h4>
+              <div class="spec-facts" id="specFactsBox">
+                <!-- Dynamic WebsiteSpec values inserted here -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Collapsible Code Inspector Drawer -->
+        <div id="codeInspectorDrawer" class="code-drawer glass-panel hidden">
+          <div class="drawer-header">
+            <div class="file-tabs" id="fileTabsContainer">
+              <!-- File tab buttons inserted here -->
+            </div>
+            <button id="closeDrawerBtn" class="close-btn">&times;</button>
+          </div>
+          <div class="drawer-body">
+            <pre><code id="codeViewer">Select a file tab to view generated React code...</code></pre>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

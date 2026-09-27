@@ -1,0 +1,18 @@
+# Environment files containing sensitive keys
+.env.local
+.env
+.env.*.local
+
+# Node modules
+node_modules/
+
+# Logs & temp files
+*.log
+npm-debug.log*
+test_*.js
+*.json.tmp
+wiki_result.json
+
+# Playwright artifacts
+test-results/
+playwright-report/
